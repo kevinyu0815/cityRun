@@ -143,12 +143,4 @@ img/store.png,
 img/themepark.png,
 img/title.png,
 img/zoo.png,
-font/font.ttf,
-data/soundClick.wav,
-data/soundCoin.wav,
-data/soundCoinDown.wav,
-data/soundJump.wav,
-data/soundRound1.wav,
-data/soundRound2.wav,
-data/soundRound3.wav,
-data/story.mp4; */
+font/font.ttf; */
