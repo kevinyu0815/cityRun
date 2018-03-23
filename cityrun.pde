@@ -1,17 +1,5 @@
 import java.util.Collections;
 import java.util.Random;
-import processing.video.*;
-import ddf.minim.*;
-
-Minim minim;
-AudioPlayer soundRound1; //背景音樂
-AudioSample soundJump;
-AudioSample soundCoin;
-AudioSample soundClick;
-AudioSample soundGameOver;
-AudioSample soundCountDown;
-
-Movie movie;
 PFont font1, font2;
 PImage title, round1bg, round2bg, round3bg, start0, start1;
 PImage next0, next1, return0, return1, buy0, buy1, buy2;
@@ -215,7 +203,7 @@ void setup() {
   lose = loadImage("img/lose.png");
   octopus = loadImage("img/octopus.png");
 
-  movie = new Movie(this, "story.mp4");
+  
 
   // load carColor Image
   carColor = new PImage[3];
@@ -246,17 +234,7 @@ void setup() {
   initBonus();
   initHeart();
 
-  //sound
-  minim = new Minim(this);
-  soundJump = minim.loadSample("soundJump.wav", 128);
-  soundCoin = minim.loadSample("soundCoin.wav", 128);
-  soundClick = minim.loadSample("soundClick.wav", 128);
-  soundRound1 = minim.loadFile("soundRound1.wav", 50000);
-  soundCountDown = minim.loadSample("soundCountDown.wav",9160);
-}
-
-void movieEvent(Movie m) {
-  m.read();
+  
 }
 
 void draw() {
@@ -267,8 +245,8 @@ void draw() {
     if (isMouseHit(START_BUTTON_X, START_BUTTON_Y, START_BUTTON_WIDTH, START_BUTTON_HEIGHT)) {
       image(start1, START_BUTTON_X, START_BUTTON_Y);
       if (mousePressed) {
-        gameState = GAME_STORY;
-        soundClick.trigger();
+        gameState = GAME_ROLE;
+        
         mousePressed = false;
       }
     } else {
@@ -278,35 +256,6 @@ void draw() {
     break;
 
   case GAME_STORY:
-    movie.play();
-    float mt = movie.time();
-    image(movie, 0, 0, 1000, 500);
-    
-    // next
-    if (mt >= 5) {
-      if (isMouseHit(NEXT_BUTTON_X, NEXT_BUTTON_Y, NEXT_BUTTON_WIDTH, NEXT_BUTTON_HEIGHT)) {
-        image(next1, NEXT_BUTTON_X, NEXT_BUTTON_Y); 
-        if (mousePressed) {
-          gameState = GAME_ROLE;
-          soundClick.trigger();
-          mousePressed = false;
-        }
-      } else {
-        image(next0, NEXT_BUTTON_X, NEXT_BUTTON_Y);
-      }
-
-      //return
-      if (isMouseHit(RETURN_BUTTON_X, RETURN_BUTTON_Y, RETURN_BUTTON_WIDTH, RETURN_BUTTON_HEIGHT)) {
-        image(return1, RETURN_BUTTON_X, RETURN_BUTTON_Y); 
-        if (mousePressed) {
-          movie.jump(0);
-          soundClick.trigger();
-          mousePressed = false;
-        }
-      } else {
-        image(return0, RETURN_BUTTON_X, RETURN_BUTTON_Y);
-      }
-    } 
     break;
 
   case GAME_ROLE:
@@ -323,7 +272,6 @@ void draw() {
         gameState = GAME_HOW;
         initPuzzle();
         mousePressed = false;
-        soundClick.trigger();
       }
     }
     image(role0, DETECTIVE_X, ROLE_Y);
@@ -335,8 +283,6 @@ void draw() {
       tint(255);
       image(text1, 315, 398); 
       if (mousePressed) {
-        soundClick.trigger();
-
         whichRole = "1";
         player = new Player(whichRole);
         gameState = GAME_HOW;
@@ -353,7 +299,6 @@ void draw() {
       tint(255);
       image(text2, 235, 398); 
       if (mousePressed) {
-        soundClick.trigger();
 
         whichRole = "2"; 
         player = new Player(whichRole);
@@ -371,7 +316,6 @@ void draw() {
       tint(255);
       image(text3,235, 398); 
       if (mousePressed) {
-        soundClick.trigger();
         whichRole = "3";
         player = new Player(whichRole);
         gameState = GAME_HOW;
@@ -388,7 +332,6 @@ void draw() {
       tint(255);
        image(text4, 235, 398 ); 
       if (mousePressed) {
-        soundClick.trigger();
         whichRole = "4"; 
         player = new Player(whichRole);
         gameState = GAME_HOW;
@@ -408,7 +351,6 @@ void draw() {
       image(how1, 0, 0);
     } else {
       gameState = GAME_RUN1;
-      soundCountDown.trigger();
       howplaycount = 0;
     }
 
@@ -416,7 +358,6 @@ void draw() {
       image(next1, NEXT_BUTTON_X, NEXT_BUTTON_Y); 
       if (mousePressed) {
         howplaycount ++;
-        soundClick.trigger();
         mousePressed = false;
       }
     } else {
@@ -429,7 +370,6 @@ void draw() {
   case GAME_RUN1:
 
     checkWhichRound = 1;
-    soundRound1.loop();
     milkcount = 3;
     milkspace = 3000;
     image(round1bg, 0, 0);  
@@ -489,7 +429,6 @@ void draw() {
       bonusRecord1 = bonusCount;
 
       if (gameState == GAME_RUN2){
-        soundCountDown.trigger();
         time = 670;
         transSpeed = 0;
       }
@@ -592,7 +531,6 @@ void draw() {
       bonusRecord2 = bonusCount;
       if (gameState == GAME_RUN3)
       {
-              soundCountDown.trigger();
 
         time = 670;
         transSpeed = 0;
@@ -745,7 +683,6 @@ void draw() {
     if (isMouseHit(NEXT_BUTTON_X, NEXT_BUTTON_Y, NEXT_BUTTON_WIDTH, NEXT_BUTTON_HEIGHT)) {
       image(next1, NEXT_BUTTON_X, NEXT_BUTTON_Y); 
       if (mousePressed) {
-                soundClick.trigger();
       gameState = PUZZLE_BUY;
       mousePressed = false;
       }
@@ -771,7 +708,6 @@ void draw() {
       if (isMouseHit(NEXT_BUTTON_X, NEXT_BUTTON_Y, NEXT_BUTTON_WIDTH, NEXT_BUTTON_HEIGHT)) {
         image(right1, NEXT_BUTTON_X, NEXT_BUTTON_Y);
         if (mousePressed) {
-                  soundClick.trigger();
           gameState = PUZZLE_PLAY;
           mousePressed = false;
         }
@@ -784,7 +720,6 @@ void draw() {
         if (isMouseHit(BUY_BUTTON_X, BUY_BUTTON_Y, BUY_BUTTON_WIDTH, BUY_BUTTON_HEIGHT)) {
           image(buy2, BUY_BUTTON_X, BUY_BUTTON_Y);
           if (mousePressed) {
-                    soundClick.trigger();
             bonusCount++;
             coinCount -= 200;
             mousePressed = false;
@@ -1147,7 +1082,6 @@ void coins()
         if (isHit(player.x, player.y, player.w/2, player.h, coins[i][j].x, coins[i][j].y, 50, 50)) 
         {
           coins[i][j] = null;
-          soundCoin.trigger();
 
           //coindisplay
           coinCount ++;
@@ -1244,7 +1178,6 @@ void keyPressed() {
       if (player.y >= 420-player.h) {
         jumpCount = 0;
       }
-      soundJump.trigger();
 
       //println(jumpCount);
       break;
@@ -1256,11 +1189,6 @@ void keyPressed() {
   }
 }
 
-void stop()
-{
-  soundJump.close();
-  minim.stop();
-}
 
 void keyReleased() {
   if (key == CODED) {
