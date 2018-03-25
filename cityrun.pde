@@ -1,5 +1,4 @@
-import java.util.Collections;
-import java.util.Random;
+//import java.util.Random;
 PFont font1, font2;
 PImage title, round1bg, round2bg, round3bg, start0, start1;
 PImage next0, next1, return0, return1, buy0, buy1, buy2;
@@ -269,7 +268,7 @@ void draw() {
       if (mousePressed) {
         whichRole = "0";
         player = new Player(whichRole);
-        gameState = GAME_HOW;
+        gameState = PUZZLE_PLAY;
         initPuzzle();
         mousePressed = false;
       }
@@ -896,7 +895,6 @@ void octopuses() {
 
 //initPuzzle
 void initPuzzle() {
-  //int a = int(random(5));
   puzzles = new Puzzle [9];
 
   for (int i=0; i<puzzles.length; i++) {
@@ -907,11 +905,22 @@ void initPuzzle() {
 
   //shuffle
 
-  shufflePuzzleArray(puzzles);
-
+  //shufflePuzzleArray(puzzles);
+  /*(315,60)(315+125,60)
+  (315,60+125)*/
   for (int i = 0; i < puzzles.length; i++) {
     float puzzleX, puzzleY;
     if (i<3) {
+      puzzleX = 315+0*125;
+      puzzleY = 60+i*125;
+    } else if (i<6) {
+      puzzleX = 315+125;
+      puzzleY = 60+(i-3)*125;
+    } else {
+      puzzleX = 315+2*125;
+      puzzleY = 60+(i-6)*125;
+    }
+    /*if (i<3) {
       puzzleX = 315+i*125;
       puzzleY = 60;
     } else if (i<6) {
@@ -920,7 +929,7 @@ void initPuzzle() {
     } else {
       puzzleX = 315+(i-6)*125;
       puzzleY = 310;
-    }
+    }*/
     puzzles[i].x = puzzleX;
     puzzles[i].y = puzzleY;
     puzzles[i].index2 = i;
@@ -1252,7 +1261,7 @@ boolean checkPuzzleWin () {
   return true;
 }
 
-void shufflePuzzleArray(Puzzle[] array) {
+/*void shufflePuzzleArray(Puzzle[] array) {
 
   // with code from WikiPedia; Fisher–Yates shuffle 
   //@ <a href="http://en.wikipedia.org/wiki/Fisher" target="_blank" rel="nofollow">http://en.wikipedia.org/wiki/Fisher</a>–Yates_shuffle
@@ -1271,3 +1280,4 @@ void shufflePuzzleArray(Puzzle[] array) {
     array[i-1] = tmp;
   }
 }
+*/
