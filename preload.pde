@@ -142,5 +142,5 @@ img/start1.png,
 img/store.png,
 img/themepark.png,
 img/title.png,
-img/zoo.png,
-font/font.ttf; */
+img/zoo.png ;
+font="font/font.ttf"; */
