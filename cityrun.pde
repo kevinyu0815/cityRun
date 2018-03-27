@@ -102,7 +102,7 @@ Bonus [] bonuses;
 Monkey [] monkeys;
 Octopus [] octopuses;
 
-Heart [] hearts;
+//Heart [] hearts;
 int heartcount = 3;
 int heartspace = 4000;
 
@@ -231,7 +231,7 @@ void setup() {
   initMonkey();
   // Bonuses
   initBonus();
-  initHeart();
+  //initHeart();
 
   
 }
@@ -408,7 +408,7 @@ void draw() {
     //bonus
     bonus();
 
-    hearts();
+    //hearts();
 
     //man
     player.display();
@@ -509,7 +509,7 @@ void draw() {
 
     //icecream
     icecream();
-    hearts();
+    //hearts();
     
     //man
     player.display();
@@ -619,7 +619,7 @@ void draw() {
 
     //monkey
     monkeys();
-    hearts();
+    //hearts();
 
     //man
     player.display();
@@ -764,6 +764,7 @@ void draw() {
 //----------------funtion()---------------------------
 
 //initHeart
+/*
 void initHeart() {
   hearts = new Heart[heartcount];
   for (int i = 0; i < hearts.length; i++) {
@@ -779,6 +780,7 @@ void hearts() {
     hearts[i].checkCollision(player);
   }
 }
+*/
 
 //initBonus
 void initBonus() {
@@ -1145,7 +1147,7 @@ void reset() {
   initIcecream();
   initBonus();
   initOctopus();
-  initHeart();
+  //initHeart();
   player.isPower = false;
   initMonkey();
   for (int i=0; i<monkeys.length; i++) {
