@@ -136,6 +136,8 @@ final int BUY_BUTTON_Y = 375;
 
 
 void setup() {
+  whichRole = "0";
+  player = new Player(whichRole);
   size(1000, 500);
 
   font1 = createFont("font/font.ttf", 40);
